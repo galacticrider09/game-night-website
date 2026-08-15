@@ -82,8 +82,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
       playing,
       toggle: () => setPlaying((p) => !p),
       next: () => setTrackIndex((i) => (i + 1) % playlist.tracks.length),
-      prev: () =>
-        setTrackIndex((i) => (i - 1 + playlist.tracks.length) % playlist.tracks.length),
+      prev: () => setTrackIndex((i) => (i - 1 + playlist.tracks.length) % playlist.tracks.length),
       volume,
       setVolume,
     }),

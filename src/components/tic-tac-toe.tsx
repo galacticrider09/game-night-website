@@ -86,10 +86,7 @@ export function TicTacToe() {
             )}
             {cell === "P2" && (
               <X
-                className={cn(
-                  "size-10 text-lavender",
-                  result?.line.includes(i) && "text-navy",
-                )}
+                className={cn("size-10 text-lavender", result?.line.includes(i) && "text-navy")}
                 strokeWidth={3}
               />
             )}
