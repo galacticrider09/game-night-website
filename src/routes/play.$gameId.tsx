@@ -27,17 +27,11 @@ export const Route = createFileRoute("/play/$gameId")({
   component: PlayRoute,
 });
 
-function PlayerBadge({
-  name,
-  initials,
-  active,
-}: {
-  name: string;
-  initials: string;
-  active: boolean;
-}) {
+function PlayerBadge({ name, initials, active }: { name: string; initials: string; active: boolean }) {
   return (
-    <div className={`glass flex items-center gap-3 rounded-3xl p-4 ${active ? "glow-ring" : ""}`}>
+    <div
+      className={`glass flex items-center gap-3 rounded-3xl p-4 ${active ? "glow-ring" : ""}`}
+    >
       <span className="grid size-11 place-items-center rounded-2xl bg-gradient-warm font-display text-navy">
         {initials}
       </span>

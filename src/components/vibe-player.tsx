@@ -17,7 +17,10 @@ export function VibePlayer({ compact = false }: { compact?: boolean }) {
 
   return (
     <section
-      className={cn("glass-strong rounded-3xl p-4", compact && "flex flex-wrap items-center gap-4")}
+      className={cn(
+        "glass-strong rounded-3xl p-4",
+        compact && "flex flex-wrap items-center gap-4",
+      )}
       aria-label="Vibe Check music player"
     >
       <div className={cn("flex items-center gap-3", compact && "min-w-56 flex-1")}>
@@ -68,7 +71,11 @@ export function VibePlayer({ compact = false }: { compact?: boolean }) {
           aria-label={playing ? "Pause" : "Play"}
           className="glow-ring grid size-11 place-items-center rounded-full bg-gradient-warm text-navy transition-transform hover:scale-105"
         >
-          {playing ? <Pause className="size-5 fill-navy" /> : <Play className="size-5 fill-navy" />}
+          {playing ? (
+            <Pause className="size-5 fill-navy" />
+          ) : (
+            <Play className="size-5 fill-navy" />
+          )}
         </button>
         <button
           onClick={next}
