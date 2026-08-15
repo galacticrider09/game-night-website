@@ -1,0 +1,8 @@
+node_modules
+.git
+.DS_Store
+.env*
+*.local
+dist
+.output
+.tanstack
