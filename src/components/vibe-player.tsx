@@ -12,8 +12,24 @@ import { playlists, usePlayer } from "@/components/player-context";
 import { cn } from "@/lib/utils";
 
 export function VibePlayer({ compact = false }: { compact?: boolean }) {
-  const { playlist, track, trackIndex, playing, toggle, next, prev, volume, setVolume } =
-    usePlayer();
+  const {
+    playlist,
+    track,
+    trackIndex,
+    playing,
+    toggle,
+    next,
+    prev,
+    volume,
+    setVolume,
+    currentTime,
+    duration,
+    seekTo,
+  } = usePlayer();
+  const progress =
+    duration > 0
+      ? (currentTime / duration) * 100
+      : 0;
 
   return (
     <section
@@ -48,12 +64,26 @@ export function VibePlayer({ compact = false }: { compact?: boolean }) {
 
       {!compact && (
         <div className="mt-4">
-          <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
-            <div className="h-full w-1/3 rounded-full bg-gradient-warm" />
-          </div>
+          <Slider
+            value={[currentTime]}
+            onValueChange={(value) => {
+              seekTo(value[0] ?? 0);
+            }}
+            min={0}
+            max={Math.max(duration, 1)}
+            step={1}
+            aria-label="Song progress"
+            className="cursor-pointer"
+          />
+
           <div className="mt-1.5 flex justify-between text-[0.7rem] text-muted-foreground">
-            <span>1:04</span>
-            <span>{track.duration}</span>
+            <span>
+              {formatTime(currentTime)}
+            </span>
+
+            <span>
+              {formatTime(duration)}
+            </span>
           </div>
         </div>
       )}
@@ -137,4 +167,18 @@ function PlaylistSelect() {
       </SelectContent>
     </Select>
   );
+}
+
+function formatTime(seconds: number) {
+  if (!Number.isFinite(seconds)) {
+    return "0:00";
+  }
+
+  const minutes = Math.floor(seconds / 60);
+
+  const remainingSeconds = Math.floor(seconds % 60);
+
+  return `${minutes}:${remainingSeconds
+    .toString()
+    .padStart(2, "0")}`;
 }
