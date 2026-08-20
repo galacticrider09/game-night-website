@@ -5,7 +5,7 @@ WORKDIR /app
 # Install dependencies
 # Using frozen-lockfile ensures deterministic builds based on the lockfile
 COPY package.json bun.lock bunfig.toml ./
-RUN bun install --frozen-lockfile
+RUN bun install
 
 # Copy the rest of the application code
 COPY . .
@@ -17,7 +17,7 @@ ENV NITRO_PRESET=node-server
 RUN bun run build
 
 # Stage 2: Serve the application
-FROM node:20-alpine AS runner
+FROM node:22-alpine AS runner
 WORKDIR /app
 
 # Copy built assets from the builder stage
